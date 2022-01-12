@@ -56,11 +56,11 @@ basePackagesClasses = 클래스 이름.class
 
 @ComponentScan은 @Component를 포함한 여러 어노테이션을 스캔하게 된다.
 
-@Component // 컴포넌트 스캔에 사용    
-@Controller // 스프링 MVC 컨트롤러에서 사용   
-@Service // 스프링 비즈니스 로직에서 사용   
-@Repository // 스프링 데이터 접근 계층에서 사용   
-@Configuration // 스프링 설정정보에서 사용   
+> @Component : 컴포넌트 스캔에 사용    
+> @Controller : 스프링 MVC 컨트롤러에서 사용   
+> @Service : 스프링 비즈니스 로직에서 사용   
+> @Repository : 스프링 데이터 접근 계층에서 사용   
+> @Configuration : 스프링 설정정보에서 사용   
 <br>
 
 > 아래 이미지 처럼 어노테이션 설정에 존재한다.
@@ -73,7 +73,61 @@ basePackagesClasses = 클래스 이름.class
 
 어노테이션은 메타정보이기 때문에, 어노테이션 만으로 추가적인 부가기능도 있다.   
 <br>
-@Controller : 스프링 MVC 컨트롤러로 인식   
-@Repository : 스프링 데이터 접근 계층으로 인식하고, 데이터 계층의 예외를 스프링 예외로 변환해준다. -> DB접근 예외를 추상화  
-@Configuration : 앞서 보았듯이 스프링 설정 정보로 인식하고, 스프링 빈이 "싱글톤"을 유지하도록 추가 처리를 한다.  
-@Service : 특별한 부가 기능은 없지만, 개발자들이 비즈니스 로직임을 인식하는데 도움이 된다.
+
+> @Controller : 스프링 MVC 컨트롤러로 인식   
+> @Repository : 스프링 데이터 접근 계층으로 인식하고, 데이터 계층의 예외를 스프링 예외로 변환해준다. -> DB접근 예외를 추상화  
+> @Configuration : 앞서 보았듯이 스프링 설정 정보로 인식하고, 스프링 빈이 "싱글톤"을 유지하도록 추가 처리를 한다.  
+> @Service : 특별한 부가 기능은 없지만, 개발자들이 비즈니스 로직임을 인식하는데 도움이 된다.
+<br>
+
+### 컴포넌트 필터
+<br>
+
+> includeFilters : 컴포넌트 스캔 대상을 추가로 지정한다.   
+> excludeFilters : 컴포넌트 스캔에서 제외할 대상을 지정한다.
+
+<br>
+
+```
+@ComponentScan(
+    includeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = MyIncludeComponent.class), 
+    excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = MyExcludeComponent.class)
+)
+```
+> 위와 같은 형태로, 포함할 필터, 제외할 필터 등을 설정할 수 있다.   
+<br>
+FilterType은 5가지 옵션이 있다.   
+<br><br>
+ANNOTATION: 기본값, 애노테이션을 인식해서 동작한다.   
+<br><br>
+
+> ex)  org.example.SomeAnnotation  ASSIGNABLE_TYPE: 지정한 타입과 자식 타입을 인식해서 동작한다.   
+> ex)  org.example.SomeClass  ASPECTJ: AspectJ 패턴 사용   
+> ex)  org.example..*Service+  REGEX: 정규 표현식   
+> ex)  org\.example\.Default.*  CUSTOM:  TypeFilter 이라는 인터페이스를 구현해서 처리   
+> ex)  org.example.MyTypeFilter   
+
+<br>
+
+예를 들어, BeanA에 @MyIncludeComponent가 있지만, BeanA를 제외하고 싶다면 아래와 같이 하면 된다.   
+
+```
+@ComponentScan(   
+    includeFilters = {         
+        @Filter(type = FilterType.ANNOTATION, classes = MyIncludeComponent.class),   
+    },   
+    excludeFilters = {         
+        @Filter(type = FilterType.ANNOTATION, classes = MyExcludeComponent.class),
+        @Filter(type = FilterType.ASSIGNABLE_TYPE, classes = BeanA.class)  
+    }
+)    
+```
+
+<br>
+
+참고:   
+> @Component 면 충분하기 때문에,   
+> includeFilters 를 사용할 일은 거의 없다.  
+> excludeFilters는 여러가지 이유로 간혹 사용할 때가 있지만 많지는 않다.      
+> 특히 최근 스프링 부트는 컴포넌트 스캔을 기본으로 제공하는데,   
+> 옵션을 변경하면서 사용하기 보다는 스프링의 기본 설정에 최대한 맞추어 사용하는 것을 권장한다.
