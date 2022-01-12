@@ -61,11 +61,12 @@ basePackagesClasses = 클래스 이름.class
 @Service // 스프링 비즈니스 로직에서 사용   
 @Repository // 스프링 데이터 접근 계층에서 사용   
 @Configuration // 스프링 설정정보에서 사용   
+<br>
 
 > 아래 이미지 처럼 어노테이션 설정에 존재한다.
-<br>
 <img width = 800 src= "https://github.com/Jeeseob/TIL/blob/main/Spring/image/Service_annotation.png">
 <br>
+
 > 어노테이션은 상속관계라는 것이 없다. 단순히 어노테이션이 특정 어노테이션이 있는 것을 인식하는 것이다.
 > 또한, 이러한 기능은 자바언어에서 지원하는 것이 아니라 스프링 프레임워크에서 지원하는 기능이다.
 >> 물론 어노테이션 자체는 자바에서 지원하는 기능이 맞다. (@interface = )
