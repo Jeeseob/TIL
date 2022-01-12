@@ -1,4 +1,4 @@
-## Spring 공부
+## Spring Component Scan
 <br>
 
 ### 컴포넌트 스캔과 의존관계 자동 주입
@@ -50,3 +50,29 @@ basePackagesClasses = 클래스 이름.class
 
 아래 사진처럼 보통 SpringBootApplication에서 처음에 만들어지는 class에 @SpringBootApplication 어노테이션이 있는 이유이다.
 <img width = 800 src= "https://github.com/Jeeseob/TIL/blob/main/Spring/image/CoreApplication_class.png">
+
+
+### 컴포넌트 스캔 대상
+
+@ComponentScan은 @Component를 포함한 여러 어노테이션을 스캔하게 된다.
+
+@Component // 컴포넌트 스캔에 사용    
+@Controller // 스프링 MVC 컨트롤러에서 사용   
+@Service // 스프링 비즈니스 로직에서 사용   
+@Repository // 스프링 데이터 접근 계층에서 사용   
+@Configuration // 스프링 설정정보에서 사용   
+
+> 아래 이미지 처럼 어노테이션 설정에 존재한다.
+<br>
+<img width = 800 src= "https://github.com/Jeeseob/TIL/blob/main/Spring/image/Service_annotation.png">
+<br>
+> 어노테이션은 상속관계라는 것이 없다. 단순히 어노테이션이 특정 어노테이션이 있는 것을 인식하는 것이다.
+> 또한, 이러한 기능은 자바언어에서 지원하는 것이 아니라 스프링 프레임워크에서 지원하는 기능이다.
+>> 물론 어노테이션 자체는 자바에서 지원하는 기능이 맞다. (@interface = )
+
+어노테이션은 메타정보이기 때문에, 어노테이션 만으로 추가적인 부가기능도 있다.   
+<br>
+@Controller : 스프링 MVC 컨트롤러로 인식   
+@Repository : 스프링 데이터 접근 계층으로 인식하고, 데이터 계층의 예외를 스프링 예외로 변환해준다. -> DB접근 예외를 추상화  
+@Configuration : 앞서 보았듯이 스프링 설정 정보로 인식하고, 스프링 빈이 "싱글톤"을 유지하도록 추가 처리를 한다.  
+@Service : 특별한 부가 기능은 없지만, 개발자들이 비즈니스 로직임을 인식하는데 도움이 된다.
