@@ -37,7 +37,7 @@
 <br>
 
 아래 이미지처럼 필드자체에서 주입하는 방식이다.   
-<img wid = 700, src = "https://github.com/Jeeseob/TIL/blob/main/Spring/image/Filed_Dependency.png">
+<img width = 700, src = "https://github.com/Jeeseob/TIL/blob/main/Spring/image/Filed_Dependency.png">
 
 <br>
 
