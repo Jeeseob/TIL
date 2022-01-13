@@ -131,3 +131,37 @@ ANNOTATION: 기본값, 애노테이션을 인식해서 동작한다.
 > excludeFilters는 여러가지 이유로 간혹 사용할 때가 있지만 많지는 않다.      
 > 특히 최근 스프링 부트는 컴포넌트 스캔을 기본으로 제공하는데,   
 > 옵션을 변경하면서 사용하기 보다는 스프링의 기본 설정에 최대한 맞추어 사용하는 것을 권장한다.
+
+<br>
+<br>
+
+### 중복 등록과 충돌
+
+컴포넌트 스캔에서 같은 빈 이름이 등록된다면??
+
+> 자동 빈 등록 VS 자동 빈 등록
+>> 'ConflictingBeanDefinitionException' 발생
+
+> 수동 빈 등록 VS 자동 빈 등록
+>> 오류 없이, 수동 등록 빈이 우선권을 가져, 오버라이딩 한다.
+>> log로 확인 가능하다. 'Overriding bean definition for bean 'springBeanName' with a different definition: replacing'
+
+<br>
+
+하지만 실제로는 개발자의 의도대로 되는 것 보단, 실수로 꼬여서 발생하는 경우가 많다.
+> 최근 스프링 부트에서는 에러가 발생한다. 
+> (@SpringBootApplication이 있는 메인 클래스를 실행하는 경우 오류 발생)
+>> log에서 확인 가능 Consider renaming one of the beans or enabling overriding by setting spring.main.allow-bean-definition-overriding=true
+<br>
+하지만, 설정을 변경하면 가능하다.    
+application.properties에 'spring.main.allow-bean-definition-overriding=true'를 추가하여 설정을 변경할 수 있다.   
+기본값은 false이다.   
+
+
+
+
+
+
+
+
+
