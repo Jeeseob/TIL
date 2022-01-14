@@ -57,8 +57,38 @@
 일반적으로 수정자, 생성자 주입선에서 구현가능하다.    
 때문에 보통 쓰이진 않는다.   
 
+<br>
 
+### 의존관계 자동주입 옵션  
+<br>
 
+@Autowired를 사용할 때, 테스트시 스프링 빈이 주입되지 않아야 하는 경우가 생길 수 있다.    
+<br>
+
+@Autowired(required=false) : 자동주입할 대상이 없을 때, 수정자 메소드 자체가 호출되지 않는다.   
+```java
+@Autowired(required = false)   
+public void setNoBean1(Member noBean1) {   
+  System.out.println("noBean1 = " + noBean1);   
+}   
+```
+
+@Nulable : 대상이 없으면 null이 입력된다.   
+```java
+@Autowired   
+public void setNoBean2(@Nullable Member noBean2) {   
+  System.out.println("noBean2 = " + noBean2);   
+}   
+```
+
+Optional\<T\> : 값이 있을 수도 있고, 없을 수도 있다. 자동 주입할 대상이 없으면 Optional.empty가 입력된다   
+ 
+```java
+@Autowired   
+public void setNoBean3(Optional<Member> noBean3) {   
+  System.out.println("noBean3 = " + noBean3);   
+}
+```
 
 
 
