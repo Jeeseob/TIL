@@ -159,7 +159,7 @@ enable 체크
 
 lombok의 기능은 getter, setter, ToString, 생성자 등을 자동으로 만들어 주는 기능을 한다.   
 특히 @RequiredArgsConstructor 의 경우, final이 붙은 필드를 파라미터로 가지는 생성자를 자동으로 만들어 준다.   
-```
+``` java
 @Component
 @RequiredArgsConstructor // Lombok 적용
 public class OrderServiceImpl implements OrderService {
