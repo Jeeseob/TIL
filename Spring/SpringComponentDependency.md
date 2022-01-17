@@ -115,3 +115,59 @@ public void setNoBean3(Optional<Member> noBean3) {
 * 기본적으로 생성자 주입을 사용하고, 필수 값이 아닌 경우에만 수정자 주입으로 옵션 부여를 하면 된다.   
 * 생성자 주입과 수정자 주입은 동시에 사용이 가능하다.   
 * 기본적으로 생성자 주입, 옵션으로 수정자 주입을 사용화면 된다.
+
+<br>
+
+### 롬복과 최신 트랜드
+
+롬북 사용 방법
+
+* 처음 셋팅시 적용
+
+> https://start.spring.io/ 에서 Dependencies에 lombok 추가 
+
+<br>
+
+* gradle 및 설정파일 수정하여 적용
+> build.gradle에 아래 코드 추가   
+> reference에서 plugin 들어간 후, lombk 검색 및 설치   
+> 이후 annotation processing 검색 후, compiler 에서 enable annotation processing 체크   
+
+build.gradle 수정 코드
+```
+//lombok 설정 추가 시작
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+//lombok 설정 추가 끝
+
+dependencies {
+	//lombok 라이브러리 추가 시작
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+	//lombok 라이브러리 추가 끝
+}
+```
+enable 체크
+
+<img width = 700, src = "https://github.com/Jeeseob/TIL/blob/main/Spring/image/Annotation_processing.png">
+
+lombok의 기능은 getter, setter, ToString, 생성자 등을 자동으로 만들어 주는 기능을 한다.   
+특히 @RequiredArgsConstructor 의 경우, final이 붙은 필드를 파라미터로 가지는 생성자를 자동으로 만들어 준다.   
+```
+@Component
+@RequiredArgsConstructor // Lombok 적용
+public class OrderServiceImpl implements OrderService {
+
+    private final MemberRepository memberRepository;
+    private final DiscountPolicy discountPolicy;
+    
+    ... // 생성자 불필요(자동 생성)
+} 
+```
+> 코드가 굉장히 간소화 되는 것을 확인 할 수 있다.
