@@ -196,9 +196,9 @@ but found 2: fixDiscountPolicy,rateDiscountPolicy
 
 <br>
 
-* 해결방법 2 : @Quilifier 사용   
+* 해결방법 2 : @Qualifier 사용   
 
-@Quilifier는 추가적인 구분자라고 생각하면 된다.   
+@Qualifier는 추가적인 구분자라고 생각하면 된다.   
 
 ```java
 @Component
@@ -213,13 +213,13 @@ public OrderServiceImpl(MemberRepository memberRepository, @Qualifier("rateDisco
     this.discountPolicy = discountPolicy;
 }
 ```
-위의 형태로 되면, @Quilifier의 이름을 찾아서 생성자를 주입한다.   
+위의 형태로 되면, @Qualifier의 이름을 찾아서 생성자를 주입한다.   
 수정자, 필드, 직접주입 등 언제든 의존관계 주입을 할 때에 사용 가능하다.   
 
 <br>
 
-만약 해당 @Quilifier를 가지는 스프링빈을 못찾으면, 해당 이름을 가지는 스프링빈을 추가로 찾는다.   
-> 웬만하면, 두번째 기능으로 사용되지 않도록... Quilifier를 찾는 용도로만 사용하자.   
+만약 해당 @Qualifier를 가지는 스프링빈을 못찾으면, 해당 이름을 가지는 스프링빈을 추가로 찾는다.   
+> 웬만하면, 두번째 기능으로 사용되지 않도록... Qualifier를 찾는 용도로만 사용하자.   
 
 
 <br>
@@ -235,7 +235,7 @@ public OrderServiceImpl(MemberRepository memberRepository, @Qualifier("rateDisco
 <br>
 
 * 추가사항
-> @Primary 와 @Quilifier 둘 다 사용한다면, @Quilifier가 우선순위가 높다.
+> @Primary 와 @Qualifier 둘 다 사용한다면, @Qualifier가 우선순위가 높다.
 
 
 
