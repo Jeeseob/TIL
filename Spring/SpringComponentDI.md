@@ -171,3 +171,16 @@ public class OrderServiceImpl implements OrderService {
 } 
 ```
 > 코드가 굉장히 간소화 되는 것을 확인 할 수 있다.
+
+
+<br>
+
+### 조회 빈이 2개 이상인 문제 발생시
+
+* 일단 오류 발생   
+> NoUniqueBeanDefinitionException:    
+> No qualifying bean of type 'hello.core.discount.DiscountPolicy' available: expected single matching bean    
+> but found 2: fixDiscountPolicy,rateDiscountPolicy
+
+
+
